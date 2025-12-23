@@ -66,16 +66,17 @@ function checkGuess(wordToBeGuessed) {
         return;
     }
     for (let i = 0; i < wordLength; i++) {
+        let addClass = "";
         let box = row.children[i];
         let letterPosition = arrayCorrectWord.indexOf(currentGuess[i]);
         if (letterPosition === -1) {
-            letterColour = "#bab1ca";
+            addClass = "incorrect";
         } else if (currentGuess[i] === arrayCorrectWord[i]) {
-            letterColour = "#51693d";
+            addClass = "correct";
         } else {
-            letterColour = "#f0f0d3";
+            addClass = "exists";
         }
-        box.style.backgroundColor = letterColour;
+        box.classList.add(addClass);
     }
 
     if (guessString == wordToBeGuessed) {

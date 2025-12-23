@@ -8,6 +8,7 @@
 		"editor.tabSize": 4,
 		"editor.indentSize": 4,
 		"editor.detectIndentation": true,
-		"editor.insertSpaces": true
+		"editor.insertSpaces": true,
+		"Scss2css.exclude": "**/_*"
 	}
 }

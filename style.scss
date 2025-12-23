@@ -65,6 +65,15 @@
             justify-content: center;
             align-items: center;
             text-transform: uppercase;
+            &.correct{
+                background-color: palette.$correct-colour;
+            }
+            &.exists{
+                background-color: palette.$wrong-spot-colour;
+            }
+            &.incorrect{
+                background-color: palette.$incorrect-colour;
+            }
         }
     }
 }
@@ -80,4 +89,5 @@
     font-family: "Dosis", sans-serif;
     font-size: 15px;
     font-weight: 200;
+    color: palette.$text-colour;
 }
