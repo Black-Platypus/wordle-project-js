@@ -10,8 +10,12 @@ import {
 
 const wordLength = 5;
 const numberOfGuesses = 6;
+const resizeboard = "zoom"; // "zoom": zoom to almost full width (keep layout); "full": expand to full width;
+const resizeKeyboard = "zoom"; // "zoom": zoom to almost full width (keep layout); "full": expand to full width;
 
-let userFeedbackText = document.getElementById("userFeedbackText");
+const userFeedbackText = document.getElementById("userFeedbackText");
+const board = document.getElementById("board");
+const keyboard = document.querySelector(".keyboard");
 
 let guessesRemaining = numberOfGuesses;
 let currentGuess = [];
@@ -19,6 +23,23 @@ let nextLetter = 0;
 let wordToBeGuessed = selectWord(words);
 let correctlyGuessed = false;
 initBoard(wordLength, numberOfGuesses);
+switch(resizeboard){
+    case "zoom":
+        board.classList.add("autoResize");
+        break;
+    case "full":
+        board.classList.add("fullwidth");
+        break;
+}
+switch(resizeKeyboard){
+    case "zoom":
+        keyboard.classList.add("autoResize");
+        break;
+    case "full":
+        keyboard.classList.add("fullwidth");
+        break;
+}
+onResize();
 
 console.log(wordToBeGuessed);
 
@@ -109,4 +130,38 @@ function checkGuess(wordToBeGuessed) {
         );
         userFeedbackText.appendChild(failureText);
     }
+}
+
+let resizeTimer;
+window.addEventListener("resize", ()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(()=>{
+        onResize();
+    }, 100);
+});
+
+async function onResize(){
+    const fw = document.body.clientWidth;
+    let fact = 1;
+    const bw = board.offsetWidth;
+    // board.style.zoom = 1;
+    // keyboard.style.zoom = 1;
+    // await waitForAniFrame(); // may be more robust if we reset and wait for draw?
+    if(board.matches(".autoResize") || bw > fw){
+        fact = fw / bw - 0.01;
+        board.style.zoom = fact;
+    }
+    
+    if(!keyboard.matches(".autoResize"))
+        return;
+    const kw = keyboard.offsetWidth;
+    fact = fw / kw - 0.1;
+    console.log(fw, kw, fact);
+    keyboard.style.zoom = fact;
+}
+
+function waitForAniFrame(){
+    return new Promise((resolve)=>{
+        requestAnimationFrame(resolve);
+    });
 }

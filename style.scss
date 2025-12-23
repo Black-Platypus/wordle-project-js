@@ -3,36 +3,36 @@
 
 .page {
     background-color: palette.$background-colour;
-    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    --word-length: 5;
 }
 .title {
     color: palette.$title-colour;
     font-family: "Dosis", sans-serif;
-    font-weight: 1000;
+    font-weight: 900;
     font-size: 50px;
 }
 
-.outputBox {
-    width: 100px;
-}
 .keyboard {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.2em;
     &__key {
-        font-size: 1rem;
+        font-size: 1em;
         font-weight: 700;
         padding: 0.5rem;
-        margin: 2px 2px;
+        // margin: 2px 2px;;
         cursor: pointer;
         text-transform: uppercase;
         border-radius: 5px;
         background-color: palette.$key-colour;
         border: none;
-        color: white;
+        color: palette.$text-colour;
         &:hover {
             background-color: palette.$key-hover;
             color: palette.$lightest-colour;
@@ -42,25 +42,47 @@
             color: palette.$lightest-colour;
         }
     }
+    >div{
+        white-space: nowrap;
+    }
+    &.fullwidth{
+        width: 100%;
+        font-size: 3vw;
+        >div{
+            width: 100%;
+            display: flex;
+            gap: 0.2em;
+        }
+        .keyboard__key{
+            flex-basis: 100%;
+            padding: 0.5em;
+        }
+        .keyboard__key:not(.noletter){
+            // aspect-ratio: 1.5;
+        }
+    }
 }
 
 .board {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 15px;
+    font-size: 2.5rem;
+    gap: 0.2em;
+    margin-bottom: 0.3em;
     &__letter-row {
         display: flex;
+        gap: 0.2em;
+        width: 100%;
         &--letter-box {
-            border: 2px solid palette.$incorrect-colour;
+            outline: 0.06em solid palette.$incorrect-colour;
             background-color: palette.$blank-colour;
-            border-radius: 3px;
             font-family: "Courier New", Courier, monospace;
-            margin: 2px;
-            font-size: 2.5rem;
             font-weight: 700;
-            height: 3rem;
-            width: 3rem;
+            border-radius: 0.08em;
+            min-width: 1.5em;
+            flex-basis: 100%;
+            aspect-ratio: 1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -76,9 +98,17 @@
             }
         }
     }
+    &.fullwidth{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 1em 0;
+    }
+    &.autoResize{
+        padding: 0 0.5em;
+    }
 }
 .filled-box {
-    border: 2px solid black;
+    outline-color: palette.$darkest-colour;
 }
 
 .letter-row {
@@ -87,7 +117,7 @@
 
 #userFeedbackText {
     font-family: "Dosis", sans-serif;
-    font-size: 15px;
     font-weight: 200;
     color: palette.$text-colour;
+    font-size: 5vw;
 }

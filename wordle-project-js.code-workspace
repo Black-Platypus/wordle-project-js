@@ -9,6 +9,9 @@
 		"editor.indentSize": 4,
 		"editor.detectIndentation": true,
 		"editor.insertSpaces": true,
-		"Scss2css.exclude": "**/_*"
+		"Scss2css.exclude": "**/x_*",
+		"Scss2css.compileOnSave": true,
+		"Scss2css.indentWidth": 4,
+		"Scss2css.output": "expanded"
 	}
 }

@@ -54,6 +54,8 @@ export function insertLetter(
         ];
     let box = row.children[nextLetter];
     box.textContent = pressedKey;
+    box.classList.add("filled-box");
+    box.scrollIntoView({behavior: "smooth", block: "nearest"})
     currentGuess.push(pressedKey);
 }
 
@@ -64,5 +66,6 @@ export function backspaceLetter(guessesRemaining, nextLetter, currentGuess, numb
         ];
     let box = row.children[nextLetter - 1];
     box.textContent = "";
+    box.classList.remove("filled-box");
     currentGuess.pop();
 }
