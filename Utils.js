@@ -18,14 +18,14 @@ export function successResponse(wordToBeGuessed, guessesTaken) {
     return `Congratulations, you guessed "${wordToBeGuessed}" in ${guessesTaken} ${attemptWord}!`;
 }
 
-export function initBoard(numberOfGuesses) {
+export function initBoard(wordLength, numberOfGuesses) {
     let board = document.getElementById("board");
 
     for (let i = 0; i < numberOfGuesses; i++) {
         let row = document.createElement("div");
         row.className = "board__letter-row";
 
-        for (let j = 0; j < 5; j++) {
+        for (let j = 0; j < wordLength; j++) {
             let box = document.createElement("div");
             box.className = "board__letter-row--letter-box";
             row.appendChild(box);
@@ -39,26 +39,28 @@ export function insertLetter(
     pressedKey,
     guessesRemaining,
     currentGuess,
-    nextLetter
+    nextLetter,
+    numberOfGuesses,
+    wordLength
 ) {
-    if (nextLetter === 5) {
+    if (nextLetter === wordLength) {
         return;
     }
     pressedKey = pressedKey.toLowerCase();
 
     let row =
         document.getElementsByClassName("board__letter-row")[
-            6 - guessesRemaining
+            numberOfGuesses - guessesRemaining
         ];
     let box = row.children[nextLetter];
     box.textContent = pressedKey;
     currentGuess.push(pressedKey);
 }
 
-export function backspaceLetter(guessesRemaining, nextLetter, currentGuess) {
+export function backspaceLetter(guessesRemaining, nextLetter, currentGuess, numberOfGuesses) {
     let row =
         document.getElementsByClassName("board__letter-row")[
-            6 - guessesRemaining
+            numberOfGuesses - guessesRemaining
         ];
     let box = row.children[nextLetter - 1];
     box.textContent = "";
