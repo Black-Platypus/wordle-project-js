@@ -41,6 +41,17 @@ document.addEventListener("keyup", (e) => {
     }
 });
 
+document.addEventListener("click", (e) => {
+    let te = e.target;
+    if(! te.matches(".keyboard button.keyboard__key"))
+        return;
+    let key = te.dataset.key || te.textContent;
+    let ev = new KeyboardEvent("keyup", {
+        key
+    });
+    document.dispatchEvent(ev);
+});
+
 function addNextLetter() {
     if (nextLetter >= wordLength) {
         return;
