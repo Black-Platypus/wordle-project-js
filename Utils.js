@@ -6,8 +6,8 @@ export function selectWord(words) {
     return words[number];
 }
 
-export function failureResponse(wordToBeGuessed) {
-    return `You failed to guess "${wordToBeGuessed}" in 6 attempts.`;
+export function failureResponse(wordToBeGuessed, guessesTaken) {
+    return `You failed to guess "${wordToBeGuessed}" in ${guessesTaken} attempts.`;
 }
 
 export function successResponse(wordToBeGuessed, guessesTaken) {

@@ -86,10 +86,9 @@ function minusNextLetter() {
 }
 
 function checkGuess(wordToBeGuessed) {
+    const guessesTaken = numberOfGuesses - guessesRemaining + 1;
     let row =
-        document.getElementsByClassName("board__letter-row")[
-            numberOfGuesses - guessesRemaining
-        ];
+        document.getElementsByClassName("board__letter-row")[guessesTaken-1];
     let guessString = currentGuess.join("");
 
     let arrayCorrectWord = Array.from(wordToBeGuessed);
@@ -115,7 +114,7 @@ function checkGuess(wordToBeGuessed) {
         const successText = document.createTextNode(
             successResponse(
                 wordToBeGuessed,
-                numberOfGuesses - guessesRemaining + 1
+                guessesTaken
             )
         );
         userFeedbackText.appendChild(successText);
@@ -126,7 +125,7 @@ function checkGuess(wordToBeGuessed) {
     currentGuess = [];
     if (guessesRemaining == 0) {
         const failureText = document.createTextNode(
-            failureResponse(wordToBeGuessed)
+            failureResponse(wordToBeGuessed, guessesTaken)
         );
         userFeedbackText.appendChild(failureText);
     }
